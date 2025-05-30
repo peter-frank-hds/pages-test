@@ -9,14 +9,14 @@ const json = {
       "elements": [
         {
           "type": "text",
-          "name": "question2",
+          "name": "question4",
           "title": "Organisation"
         },
         {
           "type": "boolean",
           "name": "question6",
           "title": {
-            "de": "Testfrage 3"
+            "de": "Testfrage 4"
           }
         },
         {
