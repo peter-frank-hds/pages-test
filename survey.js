@@ -1,8 +1,5 @@
 const json = {
-  "locale": "de",
-  "title": "Antragsformular",
-  "logo": "https://api.surveyjs.io/private/Surveys/files?name=56d5488f-4730-4e6b-8c36-6ad8bdf7a419",
-  "logoPosition": "right",
+  "locale": "de",  
   "pages": [
     {
       "name": "page1",
