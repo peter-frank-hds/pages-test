@@ -25,9 +25,9 @@
   const dataToSave = survey.data;
   if (entryId) {
     localStorage.setItem("survey_" + entryId, JSON.stringify(dataToSave));
-    alert("Formular wurde gespeichert.");
+   console.log("Formular wurde gespeichert.");
   } else {
-    alert("Kein Eintrag-ID gefunden. Speichern nicht möglich.");
+   console.log("Kein Eintrag-ID gefunden. Speichern nicht möglich.");
   }
 });
 
