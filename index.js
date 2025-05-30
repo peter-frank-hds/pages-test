@@ -4,33 +4,46 @@ function getQueryParam(name) {
 }
 
 const entryId = getQueryParam("id");
-
-// Always create the model
 const survey = new Survey.Model(json);
 
-// Try to load data if ID is present
+// Only load if we have an ID
 if (entryId) {
-  const savedData = localStorage.getItem("survey_" + entryId);
-  if (savedData) {
-    survey.data = JSON.parse(savedData);
-  }
+  fetch(flowUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      operation:    "load",
+      submissionId: entryId
+    })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Load failed: " + res.status);
+    return res.json();
+  })
+  .then(data => {
+    // apply the saved answers
+    survey.data = data.payload || {};
+    renderSurvey();
+  })
+  .catch(err => {
+    console.error(err);
+    renderSurvey();
+  });
+} else {
+  // no ID → brand‐new survey
+  renderSurvey();
 }
 
-// Apply theme and render
-survey.applyTheme(themeJson);
-survey.onComplete.add((sender, options) => {
-  console.log("Survey result:", JSON.stringify(sender.data, null, 2));
-});
-
-// Render the survey
-$(document).ready(function () {
+function renderSurvey() {
+  survey.applyTheme(themeJson);
+  survey.onComplete.add((sender) => {
+    console.log("Survey result:", JSON.stringify(sender.data, null, 2));
+  });
   $("#surveyElement").Survey({ model: survey });
-});
+}
 
-// Save on value change
-//survey.onValueChanged.add(function () {
- // if (entryId) {
-  //  localStorage.setItem("survey_" + entryId, JSON.stringify(survey.data));
- // }
-//});
-
+// Helper: call this after loading (or immediately if no load)
+function initSurvey(data) {
+  survey.data = data;
+  renderSurvey();
+}
