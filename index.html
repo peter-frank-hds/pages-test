@@ -32,7 +32,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                entryId, // your existing ID or null
+                setSubmissionId: entryId, // your existing ID or null
                 payload: survey.data,
                 status: "Draft"
             })
