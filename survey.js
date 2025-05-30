@@ -7,7 +7,7 @@ const json = {
         {
           "type": "text",
           "name": "question3",
-          "title": "Organisation"
+          "title": "Organisation3"
         },
         {
           "type": "boolean",
