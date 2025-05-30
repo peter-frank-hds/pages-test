@@ -28,8 +28,18 @@ $(document).ready(function () {
 });
 
 // Save on value change
-survey.onValueChanged.add(function () {
+//survey.onValueChanged.add(function () {
+ // if (entryId) {
+  //  localStorage.setItem("survey_" + entryId, JSON.stringify(survey.data));
+ // }
+//});
+
+document.getElementById("saveButton").addEventListener("click", function () {
+  const dataToSave = survey.data;
   if (entryId) {
-    localStorage.setItem("survey_" + entryId, JSON.stringify(survey.data));
+    localStorage.setItem("survey_" + entryId, JSON.stringify(dataToSave));
+    alert("Formular wurde gespeichert.");
+  } else {
+    alert("Kein Eintrag-ID gefunden. Speichern nicht möglich.");
   }
 });
