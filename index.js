@@ -34,12 +34,3 @@ $(document).ready(function () {
  // }
 //});
 
-document.getElementById("saveButton").addEventListener("click", function () {
-  const dataToSave = survey.data;
-  if (entryId) {
-    localStorage.setItem("survey_" + entryId, JSON.stringify(dataToSave));
-    alert("Formular wurde gespeichert.");
-  } else {
-    alert("Kein Eintrag-ID gefunden. Speichern nicht möglich.");
-  }
-});
