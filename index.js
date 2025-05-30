@@ -8,7 +8,7 @@ const survey = new Survey.Model(json);
 
 // Only load if we have an ID
 if (entryId) {
-  fetch(flowUrl, {
+  fetch("https://prod-83.westeurope.logic.azure.com:443/workflows/27e380ff4382426d8128f59e5f032ea4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RcWZ2ujw6J0hGYCnVZWT9txXu_b2oVKqVdvcwFcSyXU", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
