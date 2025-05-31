@@ -36,24 +36,65 @@ if (entryId) {
 
 function renderSurvey() {
   survey.applyTheme(themeJson);
-  survey.onComplete.add((sender) => {
-    console.log("Survey result:", JSON.stringify(sender.data, null, 2));
-  });
-  $("#surveyElement").Survey({ model: survey });
-  const completeButton = document.querySelector(".sd-navigation__complete-btn");
 
-  if (completeButton) {
-    // Create a new button
-    const saveBtn = document.createElement("input");
-    saveBtn.type = "button";
-    saveBtn.id = "saveButton";
-    saveBtn.className = completeButton.className; // same style
-    saveBtn.value = "Speichern";
-    saveBtn.title = "Speichern";
-    saveBtn.style.marginLeft = "20px";
-    // Insert the button after the complete button
-    completeButton.parentNode.insertBefore(saveBtn, completeButton.nextSibling);
-  }
+  survey.onComplete.add((sender) => {
+    console.log("Survey completed:", JSON.stringify(sender.data, null, 2));
+  });
+
+  $("#surveyElement").Survey({ model: survey });
+
+  // Wait briefly for buttons to render
+  setTimeout(() => {
+    const completeButton = document.querySelector(".sd-navigation__complete-btn");
+
+    if (completeButton && !document.getElementById("saveButton2")) {
+      const saveBtn = document.createElement("input");
+      saveBtn.type = "button";
+      saveBtn.id = "saveButton2";
+      saveBtn.className = completeButton.className;
+      saveBtn.value = "Speichern";
+      saveBtn.title = "Speichern";
+      saveBtn.style.marginLeft = "20px";
+
+      completeButton.parentNode.insertBefore(saveBtn, completeButton.nextSibling);
+
+      // ✅ Add click event handler
+      saveBtn.addEventListener("click", function () {
+        const dataToSave = survey.data;
+
+        if (entryId) {
+          localStorage.setItem("survey_" + entryId, JSON.stringify(dataToSave));
+          console.log("Speichern clicked — data saved to localStorage.");
+
+          fetch("https://prod-83.westeurope.logic.azure.com:443/workflows/27e380ff4382426d8128f59e5f032ea4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RcWZ2ujw6J0hGYCnVZWT9txXu_b2oVKqVdvcwFcSyXU", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              submissionId: entryId,
+              operation: "save",
+              payload: dataToSave,
+              status: "Draft"
+            })
+          })
+          .then(res => {
+            if (!res.ok) throw new Error("Save failed: " + res.status);
+            return res.json();
+          })
+          .then(response => {
+            console.log("Save successful:", response);
+          })
+          .catch(error => {
+            console.error("Save error:", error);
+          });
+
+        } else {
+          console.warn("Kein Eintrag-ID gefunden. Speichern nicht möglich.");
+        }
+      });
+    }
+  }, 100); // small delay to ensure SurveyJS buttons have rendered
 }
 
 // Helper: call this after loading (or immediately if no load)
