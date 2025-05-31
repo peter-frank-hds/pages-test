@@ -37,9 +37,7 @@
                 payload: survey.data,
                 status: "Draft"
             })
-        })
-        .then(r => r.json())
-        .then(j => submissionId(j.submissionId));
+        });
 
     } else {
         console.log("Kein Eintrag-ID gefunden. Speichern nicht möglich.");
