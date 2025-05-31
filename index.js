@@ -50,9 +50,10 @@ function renderSurvey() {
     saveBtn.className = completeButton.className; // same style
     saveBtn.value = "Speichern";
     saveBtn.title = "Speichern";
-
+    saveBtn.style.marginLeft = "20px";
     // Insert the button after the complete button
     completeButton.parentNode.insertBefore(saveBtn, completeButton.nextSibling);
+  }
 }
 
 // Helper: call this after loading (or immediately if no load)
