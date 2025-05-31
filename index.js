@@ -46,7 +46,7 @@ function renderSurvey() {
     // Create a new button
     const saveBtn = document.createElement("input");
     saveBtn.type = "button";
-    saveBtn.id = "saveButton2";
+    saveBtn.id = "saveButton";
     saveBtn.className = completeButton.className; // same style
     saveBtn.value = "Speichern";
     saveBtn.title = "Speichern";
