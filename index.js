@@ -40,6 +40,19 @@ function renderSurvey() {
     console.log("Survey result:", JSON.stringify(sender.data, null, 2));
   });
   $("#surveyElement").Survey({ model: survey });
+  const completeButton = document.querySelector(".sd-navigation__complete-btn");
+
+  if (completeButton) {
+    // Create a new button
+    const saveBtn = document.createElement("input");
+    saveBtn.type = "button";
+    saveBtn.id = "saveButton";
+    saveBtn.className = completeButton.className; // same style
+    saveBtn.value = "Speichern";
+    saveBtn.title = "Speichern";
+
+    // Insert the button after the complete button
+    completeButton.parentNode.insertBefore(saveBtn, completeButton.nextSibling);
 }
 
 // Helper: call this after loading (or immediately if no load)
