@@ -11,39 +11,12 @@
     <link rel="stylesheet" href="https://unpkg.com/survey-core@2.1.0/survey-core.min.css" />
   </head>
   <body>    
-    <div style="margin-top: 1000px;">
-      <button id="saveButton">💾 Speichern</button>
-    </div>
+    
     <div id="surveyElement" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; min-height: 100%; height:100%"></div>
     <script src="./json.js"></script>
     <script src="./theme.js"></script>
     <script src="./index.js"></script>
     
-  <script>
-   document.getElementById("saveButton").addEventListener("click", function () {
-    const dataToSave = survey.data;
-    if (entryId) {
-        localStorage.setItem("survey_" + entryId, JSON.stringify(dataToSave));
-
-        console.log("Formular wurde gespeichert.");
-        fetch("https://prod-83.westeurope.logic.azure.com:443/workflows/27e380ff4382426d8128f59e5f032ea4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RcWZ2ujw6J0hGYCnVZWT9txXu_b2oVKqVdvcwFcSyXU", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                submissionId: entryId, // your existing ID or null
-                operation: "save",
-                payload: survey.data,
-                status: "Draft"
-            })
-        });
-
-    } else {
-        console.log("Kein Eintrag-ID gefunden. Speichern nicht möglich.");
-    }
-  });
-  </script>
     
   </body>
 </html>
