@@ -41,7 +41,7 @@ function renderSurvey() {
     console.log("Survey completed:", JSON.stringify(sender.data, null, 2));
   });
 
-  $("#surveyElement").Survey({ model: survey });
+  $("#surveyElement-hds").Survey({ model: survey });
 
   // Wait briefly for buttons to render
   setTimeout(() => {
