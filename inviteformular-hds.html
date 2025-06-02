@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sample Layout</title>
+  <title>Page with Logo and Iframe</title>
   <style>
     body {
       margin: 0;
@@ -13,12 +13,15 @@
     .top-banner {
       height: 100px;
       background-color: #007BFF;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: bold;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 200px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60px;
     }
 
     .container {
@@ -47,7 +50,7 @@
 <body>
 
   <div class="top-banner">
-    Blue Top Area
+    <img class="logo" src="https://hausdesstiftens.powerappsportals.com/logo-basf.png" alt="Logo">
   </div>
 
   <div class="container">
@@ -55,7 +58,7 @@
       <p>This is a sample text block centered in the page. You can replace this with your own content, instructions, or dynamic data.</p>
     </div>
 
-    <iframe src="https://peter-frank-hds.github.io/pages-test/?id=1" title="External Page"></iframe>
+    <iframe src="https://peter-frank-hds.github.io/pages-test/?id=1" title="Embedded Page"></iframe>
   </div>
 
 </body>
