@@ -1,12 +1,15 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>Invitformular HDS</title>
   <style>
+    :root {
+      --horizontal-padding: 20px;
+      --top-margin: 40px;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -29,8 +32,8 @@
 
     .container {
       max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
+      margin: var(--top-margin) auto;
+      padding: 20px var(--horizontal-padding);
       background: white;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
@@ -42,14 +45,16 @@
       margin-bottom: 30px;
     }
 
-  </style>
-    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/survey-core@2.1.0/survey.core.min.js"></script>
-    <script src="https://unpkg.com/survey-core@2.1.0/survey.i18n.min.js"></script>
-    <script src="https://unpkg.com/survey-core@2.1.0/themes/index.min.js"></script>
-    <script src="https://unpkg.com/survey-js-ui@2.1.0/survey-js-ui.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/survey-core@2.1.0/survey-core.min.css" />
-
+    #surveyElement-hds {
+      width: 100%;
+    }
+  </style> 
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/survey-core@2.1.0/survey.core.min.js"></script>
+  <script src="https://unpkg.com/survey-core@2.1.0/survey.i18n.min.js"></script>
+  <script src="https://unpkg.com/survey-core@2.1.0/themes/index.min.js"></script>
+  <script src="https://unpkg.com/survey-js-ui@2.1.0/survey-js-ui.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/survey-core@2.1.0/survey-core.min.css" />
 </head>
 <body>
 
@@ -59,14 +64,13 @@
 
   <div class="container">
     <div class="text-block">
-      <p>This is a sample text block centered in the page. You can replace this with your own content, instructions, or dynamic data.</p>
-    </div>
-
-    <div id="surveyElement-hds" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; min-height: 100%; height: 100%; width: 80%; min-width: 700px"></div>
-    <script src="./json-hds.js"></script>
-    <script src="./theme-hds.js"></script>
-    <script src="./index-hds.js"></script>
-  </div>
+      <p>This is a sample text block centered in the page. You can replace this with your own content, instructions, or dynamic data.</p>      
+</div>
+<div id="surveyElement-hds"></div>
+  <script src="./json-hds.js"></script>
+  <script src="./theme-hds.js"></script>
+  <script src="./index-hds.js"></script>
+</div>
 
 </body>
 </html>
