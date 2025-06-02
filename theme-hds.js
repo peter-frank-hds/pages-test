@@ -1,4 +1,4 @@
-export const themeJsonHds = {
+const themeJsonHds = {
   "themeName": "sharp",
   "colorPalette": "dark",
   "isPanelless": true,
@@ -109,4 +109,4 @@ export const themeJsonHds = {
     "descriptionPositionY": "bottom"
   },
   "headerView": "advanced"
-}
+};
