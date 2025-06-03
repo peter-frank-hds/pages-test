@@ -37,6 +37,15 @@ if (entryId) {
 function renderSurvey() {
   survey.applyTheme(themeJsonHds);
 
+  survey.onAfterRenderQuestion.add(function (survey, options) {
+    if (options.question.name === "webseite") {
+      const input = options.htmlElement.querySelector("input");
+      if (input) {
+        input.id = "webseiteID";
+      }
+    }
+  });
+
   survey.onComplete.add((sender) => {
     console.log("Survey completed:", JSON.stringify(sender.data, null, 2));
   });
@@ -108,4 +117,5 @@ function renderSurvey() {
 function initSurvey(data) {
   survey.data = data;
   renderSurvey();
+  
 }
