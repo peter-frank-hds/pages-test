@@ -47,6 +47,8 @@ function renderSurvey() {
   // Wait briefly for buttons to render
   setTimeout(() => {
     const completeButton = document.querySelector(".sd-navigation__complete-btn");
+      completeButton.style.backgroundColor = "#28a745"; // green
+      completeButton.style.color = "#ffffff";   
 
     if (completeButton && !document.getElementById("saveButton2")) {
       const saveBtn = document.createElement("input");
@@ -56,6 +58,10 @@ function renderSurvey() {
       saveBtn.value = "Speichern";
       saveBtn.title = "Speichern";
       saveBtn.style.marginLeft = "20px";
+      saveBtn.style.backgroundColor = "#28a745"; // green
+      saveBtn.style.color = "#ffffff";    
+
+
 
       completeButton.parentNode.insertBefore(saveBtn, completeButton.nextSibling);
 
