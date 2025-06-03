@@ -45,7 +45,7 @@ const jsonhds = {
           "type": "text",
           "name": "email",
           "width": "100%",
-          "title": "E-Mail des/der Ansprechpartners/in der Organisation E-Mail der Organisation (laut Impressum)"
+          "title": "E-Mail des/der Ansprechpartners/in der Organisation E-Mail"
         },
         {
           "type": "text",
@@ -69,7 +69,7 @@ const jsonhds = {
           "type": "text",
           "name": "emailMitarbeiter",
           "width": "50%",
-          "title": "E-Mail des/der BASF Mitarbeiters/in"
+          "title": "E-Mail des Mitarbeiters"
         },
         {
           "type": "checkbox",
@@ -79,11 +79,7 @@ const jsonhds = {
             {
               "value": "Item 1",
               "text": "Ich bestätige, dass die Organisation meines Wissens nach gemeinützig (e.V., gGmbH, Stiftung, etc.) oder eine Körperschaften des öffentlichen Rechts (K.d.ö.R.) mit Sitz in Deutschland ist."
-            },
-            {
-              "value": "Item 2",
-              "text": "Ich bestätige, dass sich die nominierte Organisation meines Wissens nach mit Projekten in der Metropolregion Rhein-Neckar engagiert.Item 2"
-            }
+            }            
           ]
         }
       ]
