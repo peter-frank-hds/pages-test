@@ -36,15 +36,26 @@ if (entryId) {
 
 function renderSurvey() {
   survey.applyTheme(themeJsonHds);
-
+  
   survey.onAfterRenderQuestion.add(function (survey, options) {
-    if (options.question.name === "webseite") {
-      const input = options.htmlElement.querySelector("input");
-      if (input) {
-        input.id = "webseiteID";
+    const input = options.htmlElement.querySelector("input");
+    if (!input) return;
+
+    switch (options.question.name) {
+      case "name":
+        input.id = "name";
+        break;
+      case "adresse":
+        input.id = "syn_strasse_und_hausnummer";
+        break;
+      case "plz":
+        input.id = "syn_postleitzahl";
+        break;
+      case "ort":
+        input.id = "syn_ort";
+        break;
       }
-    }
-  });
+    });  
 
   survey.onComplete.add((sender) => {
     console.log("Survey completed:", JSON.stringify(sender.data, null, 2));
@@ -69,8 +80,6 @@ function renderSurvey() {
       saveBtn.style.marginLeft = "20px";
       saveBtn.style.backgroundColor = "#28a745"; // green
       saveBtn.style.color = "#ffffff";    
-
-
 
       completeButton.parentNode.insertBefore(saveBtn, completeButton.nextSibling);
 
