@@ -7,7 +7,7 @@
   <style>
     :root {
       --horizontal-padding: 10px;
-      --top-margin: 40px;
+      --top-margin: 10px;
     }
 
     body {
@@ -18,13 +18,13 @@
 
     .top-banner {
       height: 100px;
-      background-color: #007BFF;
+      background-color: #7d9b38;
       position: relative;
     }
 
     .logo {
       position: absolute;
-      left: 200px;
+      left: 80px;
       top: 50%;
       transform: translateY(-50%);
       height: 60px;
@@ -40,12 +40,14 @@
     }
 
     .text-block {
+      margin-left: 35;
+      margin-right: 40;
       font-size: 18px;
       line-height: 1.6;
-      margin-bottom: 10px;
+      margin-bottom: 0px;
     }
 
-    #surveyElement-hds {
+    surveyElement-hds {
       width: 100%;
     }
   </style> 
@@ -55,6 +57,27 @@
   <script src="https://unpkg.com/survey-core@2.1.0/themes/index.min.js"></script>
   <script src="https://unpkg.com/survey-js-ui@2.1.0/survey-js-ui.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/survey-core@2.1.0/survey-core.min.css" />
+
+  <style> 
+    .sd-input {      
+    padding: calc(0.5 * (var(--sjs-base-unit, var(--base-unit, 8px)))) calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px))));
+    line-height: calc(1.2 * (var(--sjs-font-editorfont-size, var(--sjs-font-size, 16px))));
+    font-size: var(--sjs-font-editorfont-size, var(--sjs-font-size, 16px));    
+    }
+
+    .sd-question__header--location-top {
+    padding-bottom: calc(0.1 * var(--sd-base-vertical-padding))
+    }
+      .sd-root--compact .sd-body.sd-body--responsive .sd-body__navigation, .sd-root--compact .sd-body.sd-body--static .sd-body__navigation {
+    padding-top: calc(1 * (var(--sjs-base-unit, var(--base-unit, 8px))));
+    }
+
+    .sd-root-modern, .sd-container-modern {    
+    --sd-base-vertical-padding: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+    --sd-page-vertical-padding: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+    }
+
+  </style> 
 </head>
 <body>
 
