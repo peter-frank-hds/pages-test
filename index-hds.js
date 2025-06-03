@@ -42,6 +42,7 @@ function renderSurvey() {
   });
 
   $("#surveyElement-hds").Survey({ model: survey });
+  survey.completeText = "Abschicken"; 
 
   // Wait briefly for buttons to render
   setTimeout(() => {
