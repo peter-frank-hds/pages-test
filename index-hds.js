@@ -3,6 +3,41 @@ function getQueryParam(name) {
   return urlParams.get(name);
 }
 
+ $("#webseiteID").autocomplete({
+      minLength: 2,
+      source: function (request, response) {
+          $.ajax({
+              url: 'https://npo-nominierung-service-app.azurewebsites.net/autocomplete_kampagne',
+              dataType: 'json',
+              data: {
+                  q: request.term,
+                  kampagne: kampagne
+              },
+              success: function (data) {
+                  response(data.map(item => ({
+                      label: item.title,
+                      value: item.title,
+                      email: item.email,
+                      strasse: item.street,
+                      plz: item.postal_code,
+                      ort: item.city,
+                      participating: item.participating,
+                      Status: item.QStatus,
+                      orgid: item.id
+                  })));
+              },
+              error: function () {
+                  console.error('Error fetching autocomplete data.');
+                  response([]);
+              }
+          });
+      },
+      select: function (event, ui) {
+          alert("1");
+      }
+  });
+
+
 const entryId = getQueryParam("id");
 const survey = new Survey.Model(jsonhds);
 
