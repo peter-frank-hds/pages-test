@@ -2,42 +2,7 @@ function getQueryParam(name) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(name);
 }
-
- $("#webseiteID").autocomplete({
-      minLength: 2,
-      source: function (request, response) {
-          $.ajax({
-              url: 'https://npo-nominierung-service-app.azurewebsites.net/autocomplete_kampagne',
-              dataType: 'json',
-              data: {
-                  q: request.term,
-                  kampagne: kampagne
-              },
-              success: function (data) {
-                  response(data.map(item => ({
-                      label: item.title,
-                      value: item.title,
-                      email: item.email,
-                      strasse: item.street,
-                      plz: item.postal_code,
-                      ort: item.city,
-                      participating: item.participating,
-                      Status: item.QStatus,
-                      orgid: item.id
-                  })));
-              },
-              error: function () {
-                  console.error('Error fetching autocomplete data.');
-                  response([]);
-              }
-          });
-      },
-      select: function (event, ui) {
-          alert("1");
-      }
-  });
-
-
+ 
 const entryId = getQueryParam("id");
 const survey = new Survey.Model(jsonhds);
 
@@ -79,6 +44,43 @@ function renderSurvey() {
     switch (options.question.name) {
       case "name":
         input.id = "name";
+        $("#name").autocomplete({
+          minLength: 2,
+          source: function (request, response) {
+              $.ajax({
+                  url: 'https://npo-nominierung-service-app.azurewebsites.net/autocomplete_kampagne',
+                  dataType: 'json',
+                  data: {
+                      q: request.term,
+                      kampagne: "BASF2024"
+                  },
+                  success: function (data) {
+                      response(data.map(item => ({
+                          label: item.title,
+                          value: item.title,
+                          email: item.email,
+                          strasse: item.street,
+                          plz: item.postal_code,
+                          ort: item.city,
+                          participating: item.participating,
+                          Status: item.QStatus,
+                          orgid: item.id
+                      })));
+                  },
+                  error: function () {
+                      console.error('Error fetching autocomplete data.');
+                      response([]);
+                  }
+              });
+          },
+          select: function (event, ui) {            
+              // You might want to populate other fields here based on the selected item
+              // For example:
+              survey.setValue("adresse", ui.item.strasse);
+              survey.setValue("plz", ui.item.plz);
+              survey.setValue("ort", ui.item.ort);
+          }
+      });
         break;
       case "adresse":
         input.id = "syn_strasse_und_hausnummer";
