@@ -84,15 +84,27 @@ function renderSurvey() {
         break;
       case "adresse":
         input.id = "syn_strasse_und_hausnummer";
+        address1Field = input;
         break;
       case "plz":
         input.id = "syn_postleitzahl";
+        postalField = input;
         break;
       case "ort":
-        input.id = "syn_ort";
+        input.id = "syn_ort";        
         break;
       }
     });  
+
+  if (options.question.name === "adresse") {
+  setTimeout(() => {
+    if (typeof google !== "undefined" && google.maps && google.maps.places) {
+      initAutocomplete(); // Call the autocomplete initializer
+    } else {
+      console.warn("Google Maps script not loaded.");
+    }
+  }, 100); // Delay ensures element is attached 
+  }
 
   survey.onComplete.add((sender) => {
     console.log("Survey completed:", JSON.stringify(sender.data, null, 2));
@@ -158,6 +170,62 @@ function renderSurvey() {
     }
   }, 100); // small delay to ensure SurveyJS buttons have rendered
 }
+
+let autocomplete;
+let address1Field;
+let postalField;
+
+function initAutocomplete() {
+  if (!address1Field || !postalField) {
+    console.error("Required fields for autocomplete are missing.");
+    return;
+  }
+
+  autocomplete = new google.maps.places.Autocomplete(address1Field, {
+    componentRestrictions: { country: ["de", "at"] },
+    fields: ["address_components", "geometry"],
+    types: ["address"]
+  });
+
+  address1Field.focus();
+  autocomplete.addListener("place_changed", fillInAddress);
+}
+
+function fillInAddress() {
+  const place = autocomplete.getPlace();
+  let address1 = "";
+  let streetNumber = "";
+  let postcode = "";
+
+  for (const component of place.address_components) {
+    const componentType = component.types[0];
+    switch (componentType) {
+      case "street_number":
+        streetNumber = component.long_name;
+        break;
+      case "route":
+        address1 = component.short_name;
+        break;
+      case "postal_code":
+        postcode = component.long_name;
+        break;
+      case "locality":
+        document.querySelector("#syn_ort").value = component.long_name;
+        break;
+    }
+  }
+
+  if (address1Field) {
+    address1Field.value = `${address1} ${streetNumber}`.trim();
+  }
+  if (postalField) {
+    postalField.value = postcode;
+    postalField.focus();
+  }
+}
+
+window.initAutocomplete = initAutocomplete;
+
 
 // Helper: call this after loading (or immediately if no load)
 function initSurvey(data) {
